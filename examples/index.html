@@ -264,6 +264,10 @@ engine.register(element, {
                     <label>Pause (ms):</label>
                     <input type="number" id="p-pause" value="2000">
                 </div>
+                <div class="control-group" style="flex:1; min-width: 120px;">
+                    <label>Cursor Char:</label>
+                    <input type="text" id="p-char" value="_" maxlength="1">
+                </div>
             </div>
             <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
                 <div style="flex: 2;">
@@ -296,14 +300,14 @@ engine.register(element, {
     <script src="../src/typing-engine.js"></script>
     <script>
         const engine = new TypingEngine();
-
+        
         // Register initial examples
         document.querySelectorAll('.dynamic-text').forEach(el => engine.register(el));
         document.querySelectorAll('.typing-fast').forEach(el => engine.register(el, { delay: 40, deleteDelay: 20, pause: 1000 }));
         document.querySelectorAll('.typing-slow').forEach(el => engine.register(el, { delay: 150, pause: 3000, humanity: 0.5 }));
         document.querySelectorAll('.typing-code').forEach(el => engine.register(el, { delay: 100, deleteDelay: 10, humanity: 0.2 }));
 
-        function testPlayground() {
+        window.testPlayground = function() {
             const resultMain = document.getElementById('p-result');
             const resultCode = document.getElementById('p-result-code');
             const codeDisplay = document.getElementById('p-code-snippet');
@@ -320,8 +324,9 @@ engine.register(element, {
             const pause = parseInt(document.getElementById('p-pause').value);
             const humanity = parseFloat(document.getElementById('p-humanity').value);
             const random = document.getElementById('p-random').checked;
+            const char = document.getElementById('p-char').value || '_';
 
-            const options = { delay, deleteDelay, pause, humanity, random };
+            const options = { delay, deleteDelay, pause, humanity, random, char };
 
             // Update code display with realistic selection logic
             codeDisplay.textContent = `// HTML\n<div class="typing-active" data-texts="${texts}"></div>\n\n// JavaScript\nconst element = document.querySelector('.typing-active');\nengine.register(element, ${JSON.stringify(options, null, 2)});`;

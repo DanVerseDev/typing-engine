@@ -1,15 +1,7 @@
 /**
- * DanVerse Typing Engine
- * An optimized, high-performance typing effect library.
- * 
- * Features:
- * - IntersectionObserver integration (pauses when out of view)
- * - Page Visibility API support (pauses when tab is inactive)
- * - Fisher-Yates randomization (shuffle without immediate repetition)
- * - Humanity Factor (Organic, human-like typing variations)
- * - GPU-accelerated CSS cursor
+ * Typing Engine
+ * High-performance typing effect library.
  */
-
 class TypingEngine {
     constructor(options = {}) {
         this.instances = new Map();
@@ -19,19 +11,15 @@ class TypingEngine {
         this.defaultDeleteDelay = options.deleteDelay ?? 50;
         this.defaultPause = options.pause ?? 2000;
         this.defaultStartDelay = options.startDelay ?? 500;
-        this.defaultHumanity = options.humanity ?? 0; // 0 to 1
+        this.defaultHumanity = options.humanity ?? 0;
+        this.defaultChar = options.char ?? '_';
 
         this._init();
     }
 
-    /**
-     * Initializes global observers and listeners
-     * @private
-     */
     _init() {
         if (typeof window === 'undefined') return;
 
-        // Visibility Observer
         if (window.IntersectionObserver) {
             this.observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -44,7 +32,6 @@ class TypingEngine {
             }, { threshold: 0.1 });
         }
 
-        // Tab Visibility Listener
         document.addEventListener('visibilitychange', () => {
             this.isTabVisible = !document.hidden;
             if (this.isTabVisible) {
@@ -55,11 +42,6 @@ class TypingEngine {
         });
     }
 
-    /**
-     * Registers an element to start the typing effect
-     * @param {HTMLElement} element - The DOM element
-     * @param {Object} options - Local overrides
-     */
     register(element, options = {}) {
         if (!element || this.instances.has(element)) return;
 
@@ -82,7 +64,8 @@ class TypingEngine {
             pause: options.pause ?? this.defaultPause,
             startDelay: options.startDelay ?? this.defaultStartDelay,
             humanity: options.humanity ?? this.defaultHumanity,
-            randomOrder: options.random ?? true
+            randomOrder: options.random ?? true,
+            char: options.char ?? this.defaultChar
         };
 
         if (instance.randomOrder) {
@@ -92,6 +75,7 @@ class TypingEngine {
             instance.currentIndex = 0;
         }
 
+        element.style.setProperty('--typing-char', `"${instance.char}"`);
         element.classList.add('typing-active');
         element.textContent = '';
         
@@ -101,14 +85,9 @@ class TypingEngine {
             this.observer.observe(element);
         }
         
-        // Ensure the first tick happens
         requestAnimationFrame(() => this._tick(instance));
     }
 
-    /**
-     * Unregisters an element and cleans up resources
-     * @param {HTMLElement} element 
-     */
     unregister(element) {
         const instance = this.instances.get(element);
         if (instance) {
@@ -139,14 +118,12 @@ class TypingEngine {
             instance.charIndex--;
             if (instance.charIndex < 0) {
                 instance.isDeleting = false;
-                
                 if (instance.randomOrder) {
                     if (instance.pool.length === 0) this._refillPool(instance);
                     instance.currentIndex = instance.pool.pop();
                 } else {
                     instance.currentIndex = (instance.currentIndex + 1) % instance.texts.length;
                 }
-
                 instance.charIndex = 0;
                 instance.timer = setTimeout(() => this._tick(instance), instance.startDelay);
                 return;
@@ -163,7 +140,6 @@ class TypingEngine {
         instance.element.textContent = currentFullText.substring(0, instance.charIndex);
         
         let baseDelay = instance.isDeleting ? instance.deleteDelay : instance.delay;
-        
         if (instance.humanity > 0) {
             const variation = baseDelay * instance.humanity;
             const randomFactor = (Math.random() * 2 - 1) * variation;
@@ -174,9 +150,7 @@ class TypingEngine {
     }
 }
 
-// Export for different environments
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = TypingEngine;
-} else {
+// Global initialization for browsers
+if (typeof window !== 'undefined') {
     window.TypingEngine = TypingEngine;
 }

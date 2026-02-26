@@ -3,7 +3,7 @@
  */
 
 .typing-active::after {
-    content: '_';
+    content: var(--typing-char, '_');
     display: inline-block;
     margin-left: 2px;
     animation: dv-typing-blink 1s infinite;
