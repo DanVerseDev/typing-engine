@@ -1,6 +1,6 @@
 {
   "name": "typing-engine",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A high-performance, resource-efficient typing effect engine with organic (human-like) typing capabilities.",
   "main": "index.js",
   "style": "src/typing-engine.css",

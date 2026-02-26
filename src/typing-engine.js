@@ -1,6 +1,7 @@
 /**
  * Typing Engine
  * High-performance typing effect library.
+ * 2026 @ DanVerse
  */
 class TypingEngine {
     constructor(options = {}) {
@@ -15,6 +16,14 @@ class TypingEngine {
         this.defaultChar = options.char ?? '_';
 
         this._init();
+    }
+
+    static autoInit(globalOptions = {}) {
+        const engine = new TypingEngine(globalOptions);
+        document.querySelectorAll('[data-texts]').forEach(el => {
+            engine.register(el);
+        });
+        return engine;
     }
 
     _init() {
@@ -47,7 +56,7 @@ class TypingEngine {
 
         const rawTexts = element.getAttribute('data-texts') || options.texts || '';
         const texts = Array.isArray(rawTexts) ? rawTexts : rawTexts.split(',').map(t => t.trim());
-        
+
         if (texts.length === 0) return;
 
         const instance = {
@@ -78,13 +87,13 @@ class TypingEngine {
         element.style.setProperty('--typing-char', `"${instance.char}"`);
         element.classList.add('typing-active');
         element.textContent = '';
-        
+
         this.instances.set(element, instance);
-        
+
         if (this.observer) {
             this.observer.observe(element);
         }
-        
+
         requestAnimationFrame(() => this._tick(instance));
     }
 
@@ -113,7 +122,7 @@ class TypingEngine {
         if (!this.isTabVisible || !instance.isVisible) return;
 
         const currentFullText = instance.texts[instance.currentIndex];
-        
+
         if (instance.isDeleting) {
             instance.charIndex--;
             if (instance.charIndex < 0) {
@@ -138,19 +147,18 @@ class TypingEngine {
         }
 
         instance.element.textContent = currentFullText.substring(0, instance.charIndex);
-        
+
         let baseDelay = instance.isDeleting ? instance.deleteDelay : instance.delay;
         if (instance.humanity > 0) {
             const variation = baseDelay * instance.humanity;
             const randomFactor = (Math.random() * 2 - 1) * variation;
             baseDelay = Math.max(10, baseDelay + randomFactor);
         }
-        
+
         instance.timer = setTimeout(() => this._tick(instance), baseDelay);
     }
 }
 
-// Global initialization for browsers
 if (typeof window !== 'undefined') {
     window.TypingEngine = TypingEngine;
 }

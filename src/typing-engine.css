@@ -1,5 +1,6 @@
 /**
- * DanVerse Typing Engine - Default Styles
+ * Typing Engine - Default Styles
+ * 2026 @ DanVerse
  */
 
 .typing-active::after {
@@ -12,11 +13,17 @@
 }
 
 @keyframes dv-typing-blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
-/* Optional: Utility class for terminal look */
 .typing-terminal {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
     background: #000;
