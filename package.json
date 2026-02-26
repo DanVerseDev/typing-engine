@@ -1,19 +1,32 @@
 {
-  "name": "@danverse/typing-engine",
+  "name": "typing-engine",
   "version": "1.0.0",
-  "description": "An optimized, high-performance typing effect library.",
-  "main": "src/typing-engine.js",
+  "description": "A high-performance, resource-efficient typing effect engine with organic (human-like) typing capabilities.",
+  "main": "dist/typing-engine.js",
+  "style": "dist/typing-engine.css",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo "Error: no test specified" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danversedev/typing-engine.git"
   },
   "keywords": [
     "typing",
-    "effect",
+    "typing-effect",
     "animation",
     "performance",
     "intersection-observer",
-    "vanilla-js"
+    "vanilla-js",
+    "organic-typing"
   ],
-  "author": "DanVerse Dev",
-  "license": "MIT"
+  "author": "Daniel Martí",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danversedev/typing-engine/issues"
+  },
+  "homepage": "https://danversedev.github.io/typing-engine/examples/index.html"
 }
