@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DanVerse Typing Engine - Mega Showcase</title>
+    <title>Typing Engine - Showcase</title>
     <link rel="stylesheet" href="../src/typing-engine.css">
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&family=Inter:wght@300;400;700&display=swap"
@@ -37,7 +37,6 @@
             border-bottom: 1px solid #1a1a2e;
         }
 
-        /* 1. Hero Style */
         .hero-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 8vw, 5rem);
@@ -54,7 +53,6 @@
             min-height: 1.6em;
         }
 
-        /* 2. Terminal Style */
         .terminal {
             background: #000;
             padding: 30px;
@@ -80,24 +78,10 @@
             padding: 0 10px;
         }
 
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 6px;
-        }
-
-        .dot-r {
-            background: #ff5f56;
-        }
-
-        .dot-y {
-            background: #ffbd2e;
-        }
-
-        .dot-g {
-            background: #27c93f;
-        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+        .dot-r { background: #ff5f56; }
+        .dot-y { background: #ffbd2e; }
+        .dot-g { background: #27c93f; }
 
         .terminal-body {
             margin-top: 10px;
@@ -105,12 +89,6 @@
             line-height: 1.6;
         }
 
-        .log-line {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        /* 3. Cards Style */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -127,22 +105,33 @@
             transition: transform 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
+        .card:hover { border-color: var(--accent); }
+        .card h3 { color: var(--accent-pink); margin-top: 0; }
+        
+        details {
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        summary {
+            font-size: 0.75rem;
+            color: var(--accent);
+            opacity: 0.6;
+            margin-bottom: 5px;
+            outline: none;
+        }
+        summary:hover { opacity: 1; }
+
+        .code-snippet {
+            padding: 10px;
+            background: #000;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #888;
+            border-left: 2px solid var(--accent-purple);
+            white-space: pre-wrap;
         }
 
-        .card h3 {
-            color: var(--accent-pink);
-            margin-top: 0;
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            color: #8b949e;
-        }
-
-        /* Interactive Playground */
         .playground {
             background: #161b22;
             padding: 30px;
@@ -151,52 +140,21 @@
             max-width: 600px;
         }
 
-        .control-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.8rem;
-            color: var(--accent);
-        }
-
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            background: #0d1117;
-            border: 1px solid #30363d;
-            color: #fff;
-            padding: 10px;
-            border-radius: 8px;
-            box-sizing: border-box;
+        .control-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-size: 0.8rem; color: var(--accent); }
+        input[type="text"], input[type="number"] {
+            width: 100%; background: #0d1117; border: 1px solid #30363d; color: #fff; padding: 10px; border-radius: 8px;
         }
 
         .btn {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: filter 0.3s;
+            background: var(--accent); color: #000; border: none; padding: 12px 25px; border-radius: 8px;
+            font-weight: bold; cursor: pointer; width: 100%; transition: filter 0.3s;
         }
-
-        .btn:hover {
-            filter: brightness(1.2);
-        }
+        .btn:hover { filter: brightness(1.2); }
 
         .tag {
-            font-size: 0.7rem;
-            background: rgba(10, 189, 198, 0.1);
-            color: var(--accent);
-            padding: 2px 8px;
-            border-radius: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.7rem; background: rgba(10, 189, 198, 0.1); color: var(--accent);
+            padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 1px;
         }
 
         .scroll-hint {
@@ -204,59 +162,34 @@
             bottom: 30px;
             animation: bounce 2s infinite;
             opacity: 0.5;
+            font-size: 0.8rem;
+            color: var(--accent);
         }
 
         @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
 
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-10px);
-            }
-
-            60% {
-                transform: translateY(-5px);
-            }
+        .github-link {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            text-decoration: none; border: 1px solid var(--accent);
         }
     </style>
 </head>
 
 <body>
 
+    <a href="https://github.com/danversedev/typing-engine" class="tag github-link">View on GitHub</a>
+
     <!-- HERO SECTION -->
     <div class="section">
-        <span class="tag">DanVerse Library</span>
+        <span class="tag">Library</span>
         <h1 class="hero-title">Typing Engine</h1>
         <div class="hero-subtitle dynamic-text"
-            data-texts="High Performance, Smart Randomization, Tab-Aware Logic, Resource Efficient"></div>
+            data-texts="High Performance, Smart Randomization, Resource Efficient"></div>
         <div class="scroll-hint">Scroll to see the power ↓</div>
-    </div>
-
-    <!-- TERMINAL SECTION -->
-    <div class="section">
-        <h2>System Simulation</h2>
-        <p>Ultra-fast delays for console-like behavior</p>
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="dot dot-r"></div>
-                <div class="dot dot-y"></div>
-                <div class="dot dot-g"></div>
-            </div>
-            <div class="terminal-body">
-                <span class="log-line">> <span class="typing-fast"
-                        data-texts="Initializing kernel 7.2.0..., Loading DanVerse modules..., Shaders optimized., Firewall active."></span></span>
-                <span class="log-line">> <span class="typing-fast"
-                        data-texts="Checking for updates..., No updates found., System stable."></span></span>
-                <span class="log-line" style="color:var(--accent-pink)">> <span class="typing-fast"
-                        data-texts="Deploying typing engine..., 100% Efficient., Zero CPU waste."></span></span>
-            </div>
-        </div>
     </div>
 
     <!-- VARIATIONS SECTION -->
@@ -264,94 +197,113 @@
         <h2>Built-in Variations</h2>
         <div class="grid">
             <div class="card">
-                <h3>The Storyteller</h3>
-                <p>Longer pauses and natural delays.</p>
-                <div class="typing-slow"
-                    data-texts="Once upon a time in DanVerse..., A library was born from code., It was fast and efficient., Every dev wanted to use it.">
-                </div>
+                <h3>Storyteller</h3>
+                <div class="typing-slow" data-texts="Once upon a time..., A library was born., It was fast."></div>
+                <details>
+                    <summary>Show Config</summary>
+                    <div class="code-snippet">engine.register(el, {
+  delay: 150,
+  pause: 3000,
+  humanity: 0.5
+});</div>
+                </details>
             </div>
             <div class="card">
-                <h3>Cyber News</h3>
-                <p>High contrast and quick cycles.</p>
-                <div class="typing-normal"
-                    data-texts="The future is here, GPU prices dropping finally, DanVerse v12 preview leaked">
-                </div>
+                <h3>Terminal</h3>
+                <div class="typing-fast" data-texts="Initializing..., Kernel 7.2.0 loaded., System stable."></div>
+                <details>
+                    <summary>Show Config</summary>
+                    <div class="code-snippet">engine.register(el, {
+  delay: 40,
+  deleteDelay: 20,
+  pause: 1000
+});</div>
+                </details>
             </div>
             <div class="card">
                 <h3>Code Assistant</h3>
-                <p>Simulating logic writing.</p>
                 <div style="font-family: monospace; color: #888;">
-                    const app = <span class="typing-code" data-texts="new DanVerse(), initEngine(), connectDB()"></span>
+                    const app = <span class="typing-code" data-texts="new Engine(), init(), run()"></span>
+                </div>
+                <details>
+                    <summary>Show Config</summary>
+                    <div class="code-snippet">engine.register(el, {
+  delay: 100,
+  deleteDelay: 10,
+  humanity: 0.2
+});</div>
+                </details>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAYGROUND SECTION -->
+    <div class="section">
+        <h2>Interactive Playground</h2>
+        <div class="playground">
+            <div class="control-group">
+                <label>Test your text (comma separated):</label>
+                <input type="text" id="p-texts" value="Magic happens here, Typing like a human, Smart & Efficient">
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <div class="control-group" style="flex:1; min-width: 120px;">
+                    <label>Delay (ms):</label>
+                    <input type="number" id="p-delay" value="80">
+                </div>
+                <div class="control-group" style="flex:1; min-width: 120px;">
+                    <label>Delete (ms):</label>
+                    <input type="number" id="p-delete-delay" value="40">
+                </div>
+                <div class="control-group" style="flex:1; min-width: 120px;">
+                    <label>Pause (ms):</label>
+                    <input type="number" id="p-pause" value="2000">
+                </div>
+            </div>
+            <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+                <div style="flex: 2;">
+                    <label>Humanity: <span id="val-humanity" style="color:var(--accent-pink)">0.3</span></label>
+                    <input type="range" id="p-humanity" min="0" max="1" step="0.1" value="0.3" oninput="document.getElementById('val-humanity').textContent = this.value">
+                </div>
+                <div style="flex: 1; display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="p-random" checked>
+                    <label for="p-random" style="margin:0">Random</label>
+                </div>
+            </div>
+            <button class="btn" onclick="testPlayground()">Apply Settings</button>
+
+            <details style="margin-top: 20px;">
+                <summary>Current Implementation Code</summary>
+                <div id="p-code-snippet" class="code-snippet"></div>
+            </details>
+            
+            <div id="p-result-container" style="margin-top: 30px; display: flex; flex-direction: column; gap: 20px; align-items: center;">
+                <div id="p-result" style="font-size: 1.8rem; min-height: 1.6em; text-align: center; color: var(--accent);"></div>
+                <div class="card" style="width: 100%; max-width: 500px; text-align: left; padding: 20px;">
+                    <div style="font-family: 'JetBrains Mono', monospace; color: #888; font-size: 1.1rem;">
+                        <span style="color: #ea00d9;">const</span> app = <span id="p-result-code" style="color: var(--accent);"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-        <!-- PLAYGROUND SECTION -->
-        <div class="section">
-            <h2>Interactive Playground</h2>
-            <div class="playground">
-                <div class="control-group">
-                    <label>Test your text (comma separated):</label>
-                    <input type="text" id="p-texts" value="Magic happens here, Typing like a human, Fully customisable, Smart & Efficient">
-                </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <div class="control-group" style="flex:1; min-width: 120px;">
-                        <label>Typing Delay (ms):</label>
-                        <input type="number" id="p-delay" value="80">
-                    </div>
-                    <div class="control-group" style="flex:1; min-width: 120px;">
-                        <label>Delete Delay (ms):</label>
-                        <input type="number" id="p-delete-delay" value="40">
-                    </div>
-                    <div class="control-group" style="flex:1; min-width: 120px;">
-                        <label>Pause (ms):</label>
-                        <input type="number" id="p-pause" value="2000">
-                    </div>
-                </div>
-                <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
-                    <div style="flex: 2;">
-                        <label>Organic Feel (Humanity): <span id="val-humanity" style="color:var(--accent-pink)">0.3</span></label>
-                        <input type="range" id="p-humanity" min="0" max="1" step="0.1" value="0.3" oninput="document.getElementById('val-humanity').textContent = this.value">
-                    </div>
-                    <div style="flex: 1; display: flex; align-items: center; gap: 8px;">
-                        <input type="checkbox" id="p-random" checked>
-                        <label for="p-random" style="margin:0">Random Order</label>
-                    </div>
-                </div>
-                            <button class="btn" onclick="testPlayground()">Apply Settings</button>
-                            
-                            <div id="p-result-container" style="margin-top: 30px; display: flex; flex-direction: column; gap: 20px; align-items: center;">
-                                <div id="p-result" style="font-size: 1.8rem; min-height: 1.6em; text-align: center; color: var(--accent);"></div>
-                                
-                                <div class="card" style="width: 100%; max-width: 500px; text-align: left; padding: 20px;">
-                                    <div style="font-family: 'JetBrains Mono', monospace; color: #888; font-size: 1.1rem;">
-                                        <span style="color: #ea00d9;">const</span> app = <span id="p-result-code" style="color: var(--accent);"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
     <script src="../src/typing-engine.js"></script>
     <script>
-        // 1. Initialize global engine with defaults
         const engine = new TypingEngine();
 
-        // 2. Register initial examples
-        document.querySelectorAll('.dynamic-text, .typing-normal').forEach(el => engine.register(el));
-        document.querySelectorAll('.typing-fast').forEach(el => engine.register(el, { delay: 40, deleteDelay: 20, pause: 1000, humanity: 0.1 }));
+        // Register initial examples
+        document.querySelectorAll('.dynamic-text').forEach(el => engine.register(el));
+        document.querySelectorAll('.typing-fast').forEach(el => engine.register(el, { delay: 40, deleteDelay: 20, pause: 1000 }));
         document.querySelectorAll('.typing-slow').forEach(el => engine.register(el, { delay: 150, pause: 3000, humanity: 0.5 }));
-        document.querySelectorAll('.typing-code').forEach(el => engine.register(el, { delay: 100, deleteDelay: 10, pause: 2000, humanity: 0.2 }));
+        document.querySelectorAll('.typing-code').forEach(el => engine.register(el, { delay: 100, deleteDelay: 10, humanity: 0.2 }));
 
-        // 3. Playground Logic
         function testPlayground() {
             const resultMain = document.getElementById('p-result');
             const resultCode = document.getElementById('p-result-code');
+            const codeDisplay = document.getElementById('p-code-snippet');
             
-            // CLEANUP: Unregister previous elements before removing them
             if (resultMain.firstChild) engine.unregister(resultMain.firstChild);
-            if (resultCode.querySelector('span:last-child')) engine.unregister(resultCode.querySelector('span:last-child'));
+            if (resultCode.firstChild) engine.unregister(resultCode.firstChild);
 
             resultMain.innerHTML = ''; 
             resultCode.innerHTML = '';
@@ -365,7 +317,9 @@
 
             const options = { delay, deleteDelay, pause, humanity, random };
 
-            // Crear y registrar nuevos elementos
+            // Update code display
+            codeDisplay.textContent = `engine.register(el, ${JSON.stringify(options, null, 2)});`;
+
             const el1 = document.createElement('div');
             el1.setAttribute('data-texts', texts);
             resultMain.appendChild(el1);
@@ -378,8 +332,7 @@
             engine.register(el2, options);
         }
 
-        // Run playground immediately on load
         testPlayground();
-    </script></body>
-
+    </script>
+</body>
 </html>
