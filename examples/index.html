@@ -108,17 +108,8 @@
         .card:hover { border-color: var(--accent); }
         .card h3 { color: var(--accent-pink); margin-top: 0; }
         
-        details {
-            margin-top: 15px;
-            cursor: pointer;
-        }
-        summary {
-            font-size: 0.75rem;
-            color: var(--accent);
-            opacity: 0.6;
-            margin-bottom: 5px;
-            outline: none;
-        }
+        details { margin-top: 15px; cursor: pointer; }
+        summary { font-size: 0.75rem; color: var(--accent); opacity: 0.6; margin-bottom: 5px; outline: none; }
         summary:hover { opacity: 1; }
 
         .code-snippet {
@@ -192,9 +183,9 @@
         <div class="scroll-hint">Scroll to see the power ↓</div>
     </div>
 
-    <!-- VARIATIONS SECTION -->
+    <!-- EXAMPLES SECTION -->
     <div class="section">
-        <h2>Built-in Variations</h2>
+        <h2>Implementation Examples</h2>
         <div class="grid">
             <div class="card">
                 <h3>Storyteller</h3>
@@ -204,8 +195,9 @@
                     <div class="code-snippet">// HTML
 &lt;div class="typing-slow" data-texts="Once upon a time..., A library was born."&gt;&lt;/div&gt;
 
-// JS
-engine.register(el, {
+// JavaScript
+const element = document.querySelector('.typing-slow');
+engine.register(element, {
   delay: 150,
   pause: 3000,
   humanity: 0.5
@@ -220,8 +212,9 @@ engine.register(el, {
                     <div class="code-snippet">// HTML
 &lt;div class="typing-fast" data-texts="Initializing..., System stable."&gt;&lt;/div&gt;
 
-// JS
-engine.register(el, {
+// JavaScript
+const element = document.querySelector('.typing-fast');
+engine.register(element, {
   delay: 40,
   deleteDelay: 20,
   pause: 1000
@@ -238,8 +231,9 @@ engine.register(el, {
                     <div class="code-snippet">// HTML
 &lt;span class="typing-code" data-texts="new Engine(), init(), run()"&gt;&lt;/span&gt;
 
-// JS
-engine.register(el, {
+// JavaScript
+const element = document.querySelector('.typing-code');
+engine.register(element, {
   delay: 100,
   deleteDelay: 10,
   humanity: 0.2
@@ -329,15 +323,17 @@ engine.register(el, {
 
             const options = { delay, deleteDelay, pause, humanity, random };
 
-            // Update code display
-            codeDisplay.textContent = `// HTML\n<div class="typing-active" data-texts="${texts}"></div>\n\n// JavaScript\nengine.register(el, ${JSON.stringify(options, null, 2)});`;
+            // Update code display with realistic selection logic
+            codeDisplay.textContent = `// HTML\n<div class="typing-active" data-texts="${texts}"></div>\n\n// JavaScript\nconst element = document.querySelector('.typing-active');\nengine.register(element, ${JSON.stringify(options, null, 2)});`;
 
             const el1 = document.createElement('div');
             el1.setAttribute('data-texts', texts);
+            el1.className = 'typing-active';
             resultMain.appendChild(el1);
 
             const el2 = document.createElement('span');
             el2.setAttribute('data-texts', texts);
+            el2.className = 'typing-active';
             resultCode.appendChild(el2);
 
             engine.register(el1, options);
