@@ -1,0 +1,19 @@
+{
+  "name": "@danverse/typing-engine",
+  "version": "1.0.0",
+  "description": "An optimized, high-performance typing effect library.",
+  "main": "src/typing-engine.js",
+  "scripts": {
+    "test": "echo "Error: no test specified" && exit 1"
+  },
+  "keywords": [
+    "typing",
+    "effect",
+    "animation",
+    "performance",
+    "intersection-observer",
+    "vanilla-js"
+  ],
+  "author": "DanVerse Dev",
+  "license": "MIT"
+}
