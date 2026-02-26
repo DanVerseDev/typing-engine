@@ -200,8 +200,12 @@
                 <h3>Storyteller</h3>
                 <div class="typing-slow" data-texts="Once upon a time..., A library was born., It was fast."></div>
                 <details>
-                    <summary>Show Config</summary>
-                    <div class="code-snippet">engine.register(el, {
+                    <summary>Show Code</summary>
+                    <div class="code-snippet">// HTML
+&lt;div class="typing-slow" data-texts="Once upon a time..., A library was born."&gt;&lt;/div&gt;
+
+// JS
+engine.register(el, {
   delay: 150,
   pause: 3000,
   humanity: 0.5
@@ -212,8 +216,12 @@
                 <h3>Terminal</h3>
                 <div class="typing-fast" data-texts="Initializing..., Kernel 7.2.0 loaded., System stable."></div>
                 <details>
-                    <summary>Show Config</summary>
-                    <div class="code-snippet">engine.register(el, {
+                    <summary>Show Code</summary>
+                    <div class="code-snippet">// HTML
+&lt;div class="typing-fast" data-texts="Initializing..., System stable."&gt;&lt;/div&gt;
+
+// JS
+engine.register(el, {
   delay: 40,
   deleteDelay: 20,
   pause: 1000
@@ -226,8 +234,12 @@
                     const app = <span class="typing-code" data-texts="new Engine(), init(), run()"></span>
                 </div>
                 <details>
-                    <summary>Show Config</summary>
-                    <div class="code-snippet">engine.register(el, {
+                    <summary>Show Code</summary>
+                    <div class="code-snippet">// HTML
+&lt;span class="typing-code" data-texts="new Engine(), init(), run()"&gt;&lt;/span&gt;
+
+// JS
+engine.register(el, {
   delay: 100,
   deleteDelay: 10,
   humanity: 0.2
@@ -318,7 +330,7 @@
             const options = { delay, deleteDelay, pause, humanity, random };
 
             // Update code display
-            codeDisplay.textContent = `engine.register(el, ${JSON.stringify(options, null, 2)});`;
+            codeDisplay.textContent = `// HTML\n<div class="typing-active" data-texts="${texts}"></div>\n\n// JavaScript\nengine.register(el, ${JSON.stringify(options, null, 2)});`;
 
             const el1 = document.createElement('div');
             el1.setAttribute('data-texts', texts);
