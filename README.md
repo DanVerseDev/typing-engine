@@ -76,7 +76,7 @@ Registers a new DOM element manually.
 Stops the effect and clears resources.
 
 ## 📄 License
-MIT License - Copyright (c) 2024 Daniel Martí
+MIT License - Copyright (c) 2026 Daniel Martí
 
 ---
 Built with ❤️ by [Daniel Martí](https://gravatar.com/danversedev) aka DanVerse(https://github.com/DanVerseDev).
